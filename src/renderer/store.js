@@ -390,6 +390,7 @@ export const store = new Vuex.Store({
         if (context.getters.active) {
           context.dispatch('stopEngine')
         }
+        context.commit('selectedGame', null)
         context.commit('variant', payload)
         const variants = ['chess', 'crazyhouse', 'racingkings', '3check', 'antichess']
         if (variants.includes(payload)) {
@@ -510,9 +511,9 @@ export const store = new Vuex.Store({
         gameInfo[curVal] = payload.game.headers(curVal)
       }
 
+      await context.dispatch('variant', variant)
       context.commit('selectedGame', payload.game)
       context.commit('gameInfo', gameInfo)
-      await context.dispatch('variant', variant)
       context.commit('newBoard')
       await context.dispatch('push', payload.game.mainlineMoves())
     },
