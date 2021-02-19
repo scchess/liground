@@ -513,8 +513,8 @@ export const store = new Vuex.Store({
 
       await context.dispatch('variant', variant)
       context.commit('selectedGame', payload.game)
-      context.commit('gameInfo', gameInfo)
       context.commit('newBoard')
+      context.commit('gameInfo', gameInfo)
       await context.dispatch('push', payload.game.mainlineMoves())
     },
     increment (context, payload) {
